@@ -51,16 +51,25 @@
 
 
 
-<meta name="description" content="Harris Corner 算法及实现Harris Corner是一个比较简单的数学公式。OpenCV官网上的Tutorial里有讲解，但是原理解释比较粗略。首先要理解的是一个公式$$ E(u,v) = \sum_{xy}[I(x+u,y+v) - I(x,y)]^2 $$123456int a;int b;for(int i = 0; i &amp;lt; 10; i++)&amp;#123;  a += b;">
+<meta name="description" content="Harris Corner 算法及实现Harris Corner是一个比较简单的数学公式。OpenCV官网上的Tutorial里有讲解，但是原理解释比较粗略。首先要理解的是一个公式$$ E(u,v) = \sum_{xy}w(x,y)[I(x+u,y+v) - I(x,y)]^2 $$
+
+x和y代表图片里的一个点的坐标,
+I(x,y)代表这个点的灰度值(彩色图片要先转化成灰度图才能用Harris">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Harris Corner">
 <meta property="og:url" content="http://blog.gameburning.com/2015/12/21/Corner/index.html">
 <meta property="og:site_name" content="GameBurning">
-<meta property="og:description" content="Harris Corner 算法及实现Harris Corner是一个比较简单的数学公式。OpenCV官网上的Tutorial里有讲解，但是原理解释比较粗略。首先要理解的是一个公式$$ E(u,v) = \sum_{xy}[I(x+u,y+v) - I(x,y)]^2 $$123456int a;int b;for(int i = 0; i &amp;lt; 10; i++)&amp;#123;  a += b;">
-<meta property="og:updated_time" content="2015-12-22T10:26:05.000Z">
+<meta property="og:description" content="Harris Corner 算法及实现Harris Corner是一个比较简单的数学公式。OpenCV官网上的Tutorial里有讲解，但是原理解释比较粗略。首先要理解的是一个公式$$ E(u,v) = \sum_{xy}w(x,y)[I(x+u,y+v) - I(x,y)]^2 $$
+
+x和y代表图片里的一个点的坐标,
+I(x,y)代表这个点的灰度值(彩色图片要先转化成灰度图才能用Harris">
+<meta property="og:updated_time" content="2015-12-22T11:03:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Harris Corner">
-<meta name="twitter:description" content="Harris Corner 算法及实现Harris Corner是一个比较简单的数学公式。OpenCV官网上的Tutorial里有讲解，但是原理解释比较粗略。首先要理解的是一个公式$$ E(u,v) = \sum_{xy}[I(x+u,y+v) - I(x,y)]^2 $$123456int a;int b;for(int i = 0; i &amp;lt; 10; i++)&amp;#123;  a += b;">
+<meta name="twitter:description" content="Harris Corner 算法及实现Harris Corner是一个比较简单的数学公式。OpenCV官网上的Tutorial里有讲解，但是原理解释比较粗略。首先要理解的是一个公式$$ E(u,v) = \sum_{xy}w(x,y)[I(x+u,y+v) - I(x,y)]^2 $$
+
+x和y代表图片里的一个点的坐标,
+I(x,y)代表这个点的灰度值(彩色图片要先转化成灰度图才能用Harris">
 
 
 
@@ -222,7 +231,13 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="Harris_Corner__u7B97_u6CD5_u53CA_u5B9E_u73B0"><a href="#Harris_Corner__u7B97_u6CD5_u53CA_u5B9E_u73B0" class="headerlink" title="Harris Corner 算法及实现"></a>Harris Corner 算法及实现</h1><p>Harris Corner是一个比较简单的数学公式。OpenCV官网上的<a href="http://docs.opencv.org/master/d4/d7d/tutorial_harris_detector.html" target="_blank" rel="external">Tutorial</a>里有讲解，但是原理解释比较粗略。<br>首先要理解的是一个公式<br>$$ E(u,v) = \sum_{xy}[I(x+u,y+v) - I(x,y)]^2 $$<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">int</span> b;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">  a += b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h1 id="Harris_Corner__u7B97_u6CD5_u53CA_u5B9E_u73B0"><a href="#Harris_Corner__u7B97_u6CD5_u53CA_u5B9E_u73B0" class="headerlink" title="Harris Corner 算法及实现"></a>Harris Corner 算法及实现</h1><p>Harris Corner是一个比较简单的数学公式。OpenCV官网上的<a href="http://docs.opencv.org/master/d4/d7d/tutorial_harris_detector.html" target="_blank" rel="external">Tutorial</a>里有讲解，但是原理解释比较粗略。<br>首先要理解的是一个公式<br>$$ E(u,v) = \sum_{xy}w(x,y)[I(x+u,y+v) - I(x,y)]^2 $$</p>
+<ul>
+<li>x和y代表图片里的一个点的坐标,</li>
+<li>I(x,y)代表这个点的灰度值(彩色图片要先转化成灰度图才能用Harris Corner)</li>
+<li></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">int</span> b;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">  a += b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>a</li>
 <li>caaa</li>
@@ -319,8 +334,8 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/GBN_Horizon.png" alt="Gao Boning" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">Gao Boning</p>
+          <img class="site-author-image" src="/GBN_Horizon.png" alt="GaoBoning" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">GaoBoning</p>
         </div>
         <p class="site-description motion-element" itemprop="description"></p>
         <nav class="site-state motion-element">
@@ -407,7 +422,7 @@
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Gao Boning</span>
+  <span class="author" itemprop="copyrightHolder">GaoBoning</span>
 </div>
 
 <div class="powered-by">
