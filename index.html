@@ -51,15 +51,12 @@
 
 
 
-<meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="GameBurning's Portforlio">
 <meta property="og:url" content="0.0.0.0/index.html">
 <meta property="og:site_name" content="GameBurning's Portforlio">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GameBurning's Portforlio">
-<meta name="twitter:description">
 
 
 
@@ -174,15 +171,6 @@
 
     
     
-      
-      
-        
-        
-        
-      
-
-      
-    
 
     
       
@@ -206,8 +194,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/02/27/Raspberry-SSH/" itemprop="url">
-                  Raspberry_SSH
+                <a class="post-title-link" href="/2016/08/24/Swap Nodes in Pairs/" itemprop="url">
+                  未命名
                 </a>
               
             
@@ -217,8 +205,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-02-27T15:02:09+08:00" content="2016-02-27">
-              2016-02-27
+            <time itemprop="dateCreated" datetime="2016-08-24T19:20:54-07:00" content="2016-08-24">
+              2016-08-24
             </time>
           </span>
 
@@ -244,9 +232,12 @@
         
           <span itemprop="articleBody">
             
-              <h1 id="How_to_generate_ssh_in_Mac_OS"><a href="#How_to_generate_ssh_in_Mac_OS" class="headerlink" title="How to generate ssh in Mac OS."></a>How to generate ssh in Mac OS.</h1><p>树莓派默认开启了SSH服务。<br>这里谈一下用Mac生成公钥和密钥的方式。</p>
-<p>Raspi has opened SSH in default.<br>So I want to take note of the ssh generation process here.</p>
-<h2 id="Generate_a_public_and_private_key"><a href="#Generate_a_public_and_private_key" class="headerlink" title="Generate a public and private key"></a>Generate a public and private key</h2>
+              <p>Swap Nodes in Pairs</p>
+<p>My original code was:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">swapPairs</span><span class="params">(self, head)</span>:</span></div><div class="line">      <span class="string">"""</span></div><div class="line">      :type head: ListNode</div><div class="line">      :rtype: ListNode</div><div class="line">      """</div><div class="line">      <span class="keyword">if</span> head == <span class="keyword">None</span> <span class="keyword">or</span> head.next == <span class="keyword">None</span>:</div><div class="line">          <span class="keyword">return</span> head</div><div class="line">      <span class="keyword">else</span>:</div><div class="line">          dummyHead = ListNode(<span class="number">0</span>)</div><div class="line">          dummyHead.next = head.next</div><div class="line"></div><div class="line">      <span class="keyword">while</span> head:</div><div class="line">          temp = head.next</div><div class="line">          <span class="keyword">if</span> temp == <span class="keyword">None</span>:</div><div class="line">              <span class="keyword">break</span></div><div class="line">          third = temp.next</div><div class="line">          <span class="keyword">if</span> third == <span class="keyword">None</span> <span class="keyword">or</span> third.next == <span class="keyword">None</span>:</div><div class="line">              fourth = third</div><div class="line">          <span class="keyword">else</span>:</div><div class="line">              fourth = third.next</div><div class="line"></div><div class="line">          prev = head</div><div class="line">          prev.next = fourth</div><div class="line">          head = temp</div><div class="line">          head.next = prev</div><div class="line">          head = third</div><div class="line"></div><div class="line">      <span class="keyword">return</span> dummyHead.next</div></pre></td></tr></table></figure>
+<p>Then I change it to a more concise style:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">swapPairs</span><span class="params">(self, head)</span>:</span></div><div class="line">      <span class="string">"""</span></div><div class="line">      :type head: ListNode</div><div class="line">      :rtype: ListNode</div><div class="line">      """</div><div class="line">      dummy = ListNode(<span class="number">0</span>)</div><div class="line">      dummy.next = head</div><div class="line">      prev = dummy</div><div class="line"></div><div class="line">      <span class="keyword">while</span> head != <span class="keyword">None</span> <span class="keyword">and</span> head.next != <span class="keyword">None</span>:</div><div class="line">          temp = head.next</div><div class="line">          third = temp.next</div><div class="line">          prev.next = temp</div><div class="line">          temp.next = head</div><div class="line">          head.next = third</div><div class="line">          prev = head</div><div class="line">          head = third</div><div class="line"></div><div class="line">      <span class="keyword">return</span> dummy.next</div></pre></td></tr></table></figure>
+
             
           </span>
         
@@ -299,7 +290,7 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-24T23:55:47+08:00" content="2016-01-24">
+            <time itemprop="dateCreated" datetime="2016-01-24T23:55:47-08:00" content="2016-01-24">
               2016-01-24
             </time>
           </span>
@@ -326,13 +317,13 @@
         
           <span itemprop="articleBody">
             
-              <h1 id="A_modern_version_of_the_traditional_game"><a href="#A_modern_version_of_the_traditional_game" class="headerlink" title="A modern version of the traditional game"></a>A modern version of the traditional game</h1><p>Despite technical restriction on visual effect, some traditional video games can still reach mainstream popularity. Pong is a typical one, which  refines experience of table tennis into an abstract version without losing the joy. It fascinates me and pushes me to rethink the gameplay:</p>
+              <h1 id="A-modern-version-of-the-traditional-game"><a href="#A-modern-version-of-the-traditional-game" class="headerlink" title="A modern version of the traditional game"></a>A modern version of the traditional game</h1><p>Despite technical restriction on visual effect, some traditional video games can still reach mainstream popularity. Pong is a typical one, which  refines experience of table tennis into an abstract version without losing the joy. It fascinates me and pushes me to rethink the gameplay:</p>
 <ul>
 <li>Can I make a deeper abstraction of it?</li>
 <li>Can I add proper modern features to it?</li>
 </ul>
 <p><img src="/img/Another-Pong_01.png" width="50%" height="50%"></p>
-<h2 id="And_here_are_my_answers"><a href="#And_here_are_my_answers" class="headerlink" title="And here are my answers."></a>And here are my answers.</h2><h2 id="Minus"><a href="#Minus" class="headerlink" title="Minus"></a>Minus</h2><p>Pong has two modes originally, one-player and two-player. I focus on one-player mode.<br>From my observation, a visible computer player is unnecessary. Players get little information from a computer opponent, for the track of the ball is highly predictable if bounced back, no matter which part of opponent the ball touches.<br>Thus, I hide the computer player, which will launch balls, outside the screen, and players can focus more on following balls and their own position.<br><img src="\img\Another-Pong_02.png" alt="Minus"></p>
+<h2 id="And-here-are-my-answers"><a href="#And-here-are-my-answers" class="headerlink" title="And here are my answers."></a>And here are my answers.</h2><h2 id="Minus"><a href="#Minus" class="headerlink" title="Minus"></a>Minus</h2><p>Pong has two modes originally, one-player and two-player. I focus on one-player mode.<br>From my observation, a visible computer player is unnecessary. Players get little information from a computer opponent, for the track of the ball is highly predictable if bounced back, no matter which part of opponent the ball touches.<br>Thus, I hide the computer player, which will launch balls, outside the screen, and players can focus more on following balls and their own position.<br><img src="\img\Another-Pong_02.png" alt="Minus"></p>
 <hr>
 <h2 id="Plus"><a href="#Plus" class="headerlink" title="Plus"></a>Plus</h2><p>After doing away with a visible computer player, I add some features to make up the gameplay.<br>Instead of a single ping-pong like ball, I create 4 types of balls — traditional ping-pong balls, fast red balls, transformable green balls and lasers. Meanwhile, in order to match the increasing tension of Pong, I set up 4 levels.<br>In showing my respect for Pong, I choose ‘Immortal’ as my background music, and carefully arrange the levels to match the rhythm.<br>Finally, thanks to the rapid development of graphic technology, I add some modern graphic features, such as the particle system, custom shaders, to improve the game experience.<br><img src="\img\Another-Pong_03.png" alt="Plus"></p>
 <p><a href="http://3.selectdate.sinaapp.com/Game/" target="_blank" rel="external">Here</a> is an online version of the game based on Unity WebGL. Use mouse to control.</p>
@@ -390,7 +381,7 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-12T18:04:49+08:00" content="2016-01-12">
+            <time itemprop="dateCreated" datetime="2016-01-12T18:04:49-08:00" content="2016-01-12">
               2016-01-12
             </time>
           </span>
@@ -417,9 +408,9 @@
         
           <span itemprop="articleBody">
             
-              <h1 id="Nefelibata"><a href="#Nefelibata" class="headerlink" title="Nefelibata"></a>Nefelibata</h1><h2 id="A_stylised_2D_adventure_game"><a href="#A_stylised_2D_adventure_game" class="headerlink" title="A stylised 2D adventure game"></a>A stylised 2D adventure game</h2><p>Nefelibata is a 2D running game. As my first complete game project made with a group of classmates, I play the roles of programmer and level designer in this game.<br>We come up with this prototype to pursue a unique visual style and a completeness of game work, because students’ game projects are often anticlimaxes and poor in visual effect. We hoped to reach most goals set at the start time, and finally we did.</p>
-<h2 id="Game_play"><a href="#Game_play" class="headerlink" title="Game play"></a>Game play</h2><p>Unlike traditional running game, in Nefelibeta, players need to control two roles at the same time — Black and White, and they move in the opposite direction, which is very tricky.<br>This two-role mechanism generates some unique rules. For example, the power-ups can be divided into two categories, the light-colour power-ups can only be absorbed by White, and dark-colour ones are for Black.<br>With two roles, players need to dodge each obstacle twice, and carefully arrange their relative positions in advance, which add to difficulty and joy of the game.</p>
-<h2 id="Visual_Effect"><a href="#Visual_Effect" class="headerlink" title="Visual Effect"></a>Visual Effect</h2><p><img src="/img/Nefelibata_01.png" alt="Different Seasons"><br>Aiming at unique visual effect, we take care of the wholeness of all scenes. The pictures above are backgrounds of Spring Level, Autumn Level and Winter Level. We make the effort to creating a feeling of harmony and build up a unique visual style.</p>
+              <h1 id="Nefelibata"><a href="#Nefelibata" class="headerlink" title="Nefelibata"></a>Nefelibata</h1><h2 id="A-stylised-2D-adventure-game"><a href="#A-stylised-2D-adventure-game" class="headerlink" title="A stylised 2D adventure game"></a>A stylised 2D adventure game</h2><p>Nefelibata is a 2D running game. As my first complete game project made with a group of classmates, I play the roles of programmer and level designer in this game.<br>We come up with this prototype to pursue a unique visual style and a completeness of game work, because students’ game projects are often anticlimaxes and poor in visual effect. We hoped to reach most goals set at the start time, and finally we did.</p>
+<h2 id="Game-play"><a href="#Game-play" class="headerlink" title="Game play"></a>Game play</h2><p>Unlike traditional running game, in Nefelibeta, players need to control two roles at the same time — Black and White, and they move in the opposite direction, which is very tricky.<br>This two-role mechanism generates some unique rules. For example, the power-ups can be divided into two categories, the light-colour power-ups can only be absorbed by White, and dark-colour ones are for Black.<br>With two roles, players need to dodge each obstacle twice, and carefully arrange their relative positions in advance, which add to difficulty and joy of the game.</p>
+<h2 id="Visual-Effect"><a href="#Visual-Effect" class="headerlink" title="Visual Effect"></a>Visual Effect</h2><p><img src="/img/Nefelibata_01.png" alt="Different Seasons"><br>Aiming at unique visual effect, we take care of the wholeness of all scenes. The pictures above are backgrounds of Spring Level, Autumn Level and Winter Level. We make the effort to creating a feeling of harmony and build up a unique visual style.</p>
 <h2 id="Cross-Platform"><a href="#Cross-Platform" class="headerlink" title="Cross-Platform"></a>Cross-Platform</h2><p>Out of an experimental purpose, we build this game on multiple platforms — mobile phone, PC and Leap Motion, to explore how the same game feels on different devices. Here is a <a href="https://vimeo.com/147399373" target="_blank" rel="external">video</a> showing the game on a mobile phone, and here are the game files for <a href="https://www.dropbox.com/s/sivge7ipqs5gdgj/0.02Beta.zip?dl=0" target="_blank" rel="external">Mac OS</a> and <a href="https://www.dropbox.com/s/e0qrv3lkfskv7cy/Nefelibata.apk?dl=0" target="_blank" rel="external">Android</a>.</p>
 
             
@@ -498,7 +489,7 @@
 
           <div class="site-state-item site-state-tags">
             
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">标签</span>
               
           </div>
@@ -544,7 +535,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>
